@@ -1,0 +1,7 @@
+Jasper reimplementation in Keras API
+
+This repository includes source code (in "datagen_utils/") from:
+* https://github.com/keithito/tacotron under MIT license
+* https://github.com/NVIDIA/DeepLearningExamples/tree/master/PyTorch/SpeechRecognition/Jasper licensed under Apache license.
+* https://github.com/lucko515/speech-recognition-neural-network
+* https://github.com/Tony607/keras-image-ocr
