@@ -122,3 +122,17 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# User defined
+.idea
+datasets
+build.sh
+run
+run.sh
+\#preprocess_stg2.py#
+
+desktop.ini
+
+data_gen.py~
+
+train.py~
