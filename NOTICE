@@ -1,4 +1,4 @@
-Jasper reimplementation in Keras API
+Jasper reimplementation on Intel optimized TensorFlow using Keras API
 
 This repository includes source code (in "datagen_utils/") from:
 * https://github.com/keithito/tacotron under MIT license
