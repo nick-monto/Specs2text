@@ -12,8 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# edit: adjusted parallel processing arguement to take one less cpu than available to
+# avoid hangups
 
-#!/usr/bin/env python
+# !/usr/bin/env python
 import argparse
 import os
 import glob
