@@ -11,16 +11,16 @@ run the download_librispeech.sh script. **Warning:** This method takes a *long* 
 the appropriate folders from the [librispeech website](http://www.openslr.org/12/) and extract them using tar -xvf. 
 
 After the files have been downloaded and extracted, you will then need to run the covert_json.sh script also located in the 
-datagen_utils folder to convert the files from .flac to .wav and construct a .json file containing pertainent information on the audio files.
+datagen_utils folder to convert the files from .flac to .wav and construct a .json file containing pertinent information on the audio files.
 The convert_json.sh script may need to be edited in order to select exactly which datasets to convert. It is currently set up to convert
 the 100 hour clean training set.
 
 Following the conversion of the .flac files and the creation of the .json file, you can then run the train.py script which will initialize and train
 a 5x3 Jasper model on the dataset(s) of your choosing. Should the training set you which to use be different than the 100 hour clean set from
-librispeech speech, you will need to update model.compile() with the appropriate max lengths of computed spectrogram and normalized
+LibriSpeech speech, you will need to update model.compile() with the appropriate max lengths of computed spectrogram and normalized
 sentence.
 
-This project has been developed on Intel Devcloud and Intel NUC.
+This project has been developed on Intel [Devcloud](https://software.intel.com/en-us/devcloud) and Intel [NUC](https://www.intel.com/content/www/us/en/products/boards-kits/nuc.html).
 
 Package requirements:
 - Tensorflow 1.14
