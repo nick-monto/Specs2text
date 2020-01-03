@@ -1,4 +1,4 @@
-Specs2Text
+##Specs2Text
 
 This is a reimplementation of the [Jasper](https://arxiv.org/pdf/1904.03288.pdf) speech-to-text network on Intel optimized
 TensorFlow using the included Keras API. 
@@ -16,14 +16,14 @@ The convert_json.sh script may need to be edited in order to select exactly whic
 the 100 hour clean training set.
 
 Following the conversion of the .flac files and the creation of the .json file, you can then run the train.py script which will initialize and train
-a 5x3 Jasper model on the dataset(s) of your choosing. Should the training set you which to use be different than the 100 hour clean set from
+a 5x3 Jasper model on the dataset(s) of your choosing. Should the training set you wish to use is different than the 100 hour clean set from
 LibriSpeech speech, you will need to update model.compile() with the appropriate max lengths of computed spectrogram and normalized
 sentence.
 
 This project has been developed on Intel [Devcloud](https://software.intel.com/en-us/devcloud) and Intel [NUC](https://www.intel.com/content/www/us/en/products/boards-kits/nuc.html).
 
 Package requirements:
-- Tensorflow 1.14
+- TensorFlow 1.14
 - Scipy
 - Numpy
 - Matplotlib
