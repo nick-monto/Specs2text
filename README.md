@@ -1,4 +1,4 @@
-##Specs2Text
+# Specs2Text
 
 This is a reimplementation of the [Jasper](https://arxiv.org/pdf/1904.03288.pdf) speech-to-text network on Intel optimized
 TensorFlow using the included Keras API. 
