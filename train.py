@@ -21,11 +21,12 @@ manifest = Manifest(data_dir, manifest_paths, labels, len(labels), pad_to_max=Fa
                     normalize=True, speed_perturbation=False)
 
 # TODO extract absolute max lengths for specs and labels for padding purposes
+#  Done
 train_gen = BatchGen(manifest, batch_size=16)
 
 # compile model with max lengths
-model = small_model((None, 2451, 256),
-                    len(manifest.labels_map)+1, 398, train=True)
+model = small_model((None, max(train_gen.spec_lengths), 256),
+                    len(manifest.labels_map) + 1, train_gen.max_transcript_len, train=True)
 
 
 # TODO sequence length error at ctc_3, sequence length(0) <= 760

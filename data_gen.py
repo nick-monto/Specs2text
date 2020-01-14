@@ -10,13 +10,13 @@ from sklearn.utils import shuffle
 
 
 class WavAudio(object):
-    def __init__(self, audio_path, window_length=0.02, skip_window=0.010,
+    def __init__(self, audio_path, window_length=0.02, skip_window=0.01,
                  fft_length=None, freq_max=8000):
         fs, audio = wavfile.read(audio_path)
         audio = audio.astype(np.float32)
         self.audio = audio
         self.fs = fs
-        self.fft_length = fft_length or 2 ** math.ceil(math.log2(self.fs*window_length))
+        self.fft_length = fft_length or 2 ** math.ceil(math.log2(self.fs * window_length))
         (p_sgram, p_maxtime, p_maxfreq) = sgram(audio, int(skip_window * fs),
                                                 int(window_length * fs), self.fft_length,
                                                 fs, freq_max)
@@ -32,9 +32,12 @@ class WavAudio(object):
 
 
 class BatchGen(object):
-    def __init__(self, manifest, batch_size=16, shuffling=True):
+    def __init__(self, manifest, batch_size=16, win_len=0.02, skip_len=0.01,
+                 shuffling=True):
         self.cur_index = 0
         self.batch_size = batch_size
+        self.win_len = win_len
+        self.skip_len = skip_len
         self.manifest = manifest
         self.shuffling = shuffling
 
@@ -48,6 +51,11 @@ class BatchGen(object):
             duration.append(self.manifest[i]['duration'])
         self.durations = duration
 
+        spec_length = []
+        for i in range(len(self.durations)):
+            spec_length.append(int((self.durations[i] * 100 - win_len) / (skip_len * 100)))
+        self.spec_lengths = spec_length
+
         transcript = []
         for i in range(len(self.manifest)):
             transcript.append(manifest[i]['transcript'])
@@ -60,6 +68,7 @@ class BatchGen(object):
 
         del audiopath
         del duration
+        del spec_length
         del transcript
         del transcript_len
 
@@ -99,9 +108,7 @@ class BatchGen(object):
             yield ret
 
     def genshuffle(self):
-        self.wavpath, self.transcript, self.finish = shuffle(self.wavpath,
-                                                             self.transcript,
-                                                             self.finish)
+        self.audiopaths, self.transcripts = shuffle(self.audiopaths, self.transcripts)
 
     def input_gen(self, audio_paths, transcripts, normalize=True):
         #print("audio length: {}. transcription length: {}".format(len(audio_paths), len(transcripts)))
@@ -110,13 +117,14 @@ class BatchGen(object):
         sentence_lengths = []
         spec_lengths = []
         for i in range(len(audio_paths)):
-            audio = WavAudio(audio_paths[i][0])
+            audio = WavAudio(audio_paths[i][0], window_length=self.win_len,
+                             skip_window=self.skip_len)
             spec.append(audio.specgram)
             sentence_lengths.append(len(transcripts[i]))
             spec_lengths.append(len(spec[i]))
         spec = np.asarray(spec)
 
-        input_data = np.zeros([spec.shape[0], 2451, spec[0].shape[1]])
+        input_data = np.zeros([spec.shape[0], max(self.spec_lengths), spec[0].shape[1]])
         targets = np.ones([len(transcripts), self.max_transcript_len]) * 28  # 28 for coding blank
         label_length = np.zeros([len(transcripts), 1])
         input_length = np.zeros([spec.shape[0], 1])
