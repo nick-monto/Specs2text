@@ -1,6 +1,6 @@
 # Specs2Text
 
-This is a reimplementation of the [Jasper](https://arxiv.org/pdf/1904.03288.pdf) speech-to-text network on Intel optimized
+This is an in progress reimplementation of the [Jasper](https://arxiv.org/pdf/1904.03288.pdf) speech-to-text network on Intel optimized
 TensorFlow using the included Keras API. 
 
 In order to run this network you will first need to download and extract the appropraite training data. In order to do this, set this master folder
@@ -31,3 +31,5 @@ Package requirements:
 - Inflect
 
 You can install the required packages using pip via the terminal by entering ```console pip install -r requirements.txt``` while in the master folder.
+
+To date, I have not had the compute resources necessary to fully train, test, and debug the network. I am still working on securing the necessary resources.
