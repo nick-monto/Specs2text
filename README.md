@@ -3,7 +3,7 @@
 This is an in progress reimplementation of the [Jasper](https://arxiv.org/pdf/1904.03288.pdf) speech-to-text network on Intel optimized
 TensorFlow using the included Keras API. 
 
-In order to run this network you will first need to download and extract the appropraite training data. In order to do this, set this master folder
+In order to run this network you will first need to download and extract the appropraite training data. To do this, set this master folder
 as your working directory and run the bash script, download_librispeech.sh, located in the datagen_utils folder. This will download
 the datasets listed in the librispeech.csv file. Currently, only the 100 hour clean training set is listed, with the other sets listed in the
 extra.csv file. If you wish to download all of the training files, copy-paste the lines in the extra.csv file into the librispeech.csv file, then
