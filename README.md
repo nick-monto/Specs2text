@@ -30,6 +30,4 @@ Package requirements:
 - Unidecode
 - Inflect
 
-You can install the required packages using pip via the terminal by entering ```console pip install -r requirements.txt``` while in the master folder.
-
 To date, I have not had the compute resources necessary to fully train, test, and debug the network. I am still working on securing the necessary resources.
